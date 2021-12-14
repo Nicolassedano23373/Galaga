@@ -24,6 +24,7 @@ public class Board  extends JPanel implements Runnable, MouseListener {
     String message = "Click the Board to Start";
     private Thread animator;
     Player p;
+    Alien[] a = new Alien[10];
 
     public Board() {
         addKeyListener(new TAdapter());
@@ -31,6 +32,19 @@ public class Board  extends JPanel implements Runnable, MouseListener {
         setFocusable(true);
         d = new Dimension(BOARD_WIDTH, BOARD_HEIGHT);
         p = new Player(BOARD_WIDTH / 2, BOARD_HEIGHT - 60, 5);
+
+        int ax = 10;
+        int ay = 10;
+
+        for(int i=0; i<a.length; i++){
+            a[i] = new Alien(ax,ay,10);
+            ax += 40;
+            if(i==4){
+                ax=10;
+                ay += 40;
+            }
+
+        }
 
 
         setBackground(Color.BLACK);
@@ -65,6 +79,12 @@ public class Board  extends JPanel implements Runnable, MouseListener {
 
         if (p.moveLeft == true)
             p.x -= p.speed;
+        moveAliens();
+
+        for(int i=0; i<a.length; i++){
+            g.fillRect(a[i].x, a[i].y, 30, 30);
+
+        }
 
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr = this.getFontMetrics(small);
@@ -79,6 +99,61 @@ public class Board  extends JPanel implements Runnable, MouseListener {
         }
         Toolkit.getDefaultToolkit().sync();
         g.dispose();
+    }
+
+    public void moveAliens(){
+        for(int i=0; i<a.length; i++) {
+            if(a[i].moveLeft==true){
+                a[i].x -= 3;//a[i].speed;
+
+            }
+
+            if(a[i].moveRight==true){
+                a[i].x += 3;//a[i].speed;
+
+            }
+
+            if(a[i].x>BOARD_WIDTH){
+                for(int j=0; j<a.length; j++){
+                    a[j].moveLeft=true;
+                    a[j].moveRight=false;
+                    a[j].y += 5;
+                }
+
+
+            }
+
+            if(a[i].x<0){
+                for(int j=0; j<a.length; j++){
+                    a[j].moveRight=true;
+                    a[j].moveLeft=false;
+                    a[j].y += 5;
+                }
+
+            }
+
+
+            //a[i].y += a[i].speed;
+
+        }
+        for(int i=0; i<a.length; i++) {
+            if (a[i].x > BOARD_WIDTH) {
+                for (int j = 0; j < a.length; j++) {
+                    a[j].moveLeft = true;
+                    a[j].moveRight = false;
+                }
+
+
+            }
+
+            if (a[i].x < 0) {
+                for (int j = 0; j < a.length; j++) {
+                    a[j].moveRight = true;
+                    a[j].moveLeft = false;
+                }
+
+            }
+        }
     }
 
     private class TAdapter extends KeyAdapter {
