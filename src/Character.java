@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class Character {
     int x;
     int y;
@@ -12,5 +14,9 @@ public class Character {
        this.y = y;
        this.speed = speed;
 
+    }
+
+    protected static Component getCharacter() {
+        return null;
     }
 }
