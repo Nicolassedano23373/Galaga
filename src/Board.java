@@ -80,6 +80,7 @@ public class Board  extends JPanel implements Runnable, MouseListener {
         if (p.moveLeft == true)
             p.x -= p.speed;
         moveAliens();
+        getCharacter();
 
         for(int i=0; i<a.length; i++){
             g.fillRect(a[i].x, a[i].y, 30, 30);
@@ -99,6 +100,9 @@ public class Board  extends JPanel implements Runnable, MouseListener {
         }
         Toolkit.getDefaultToolkit().sync();
         g.dispose();
+    }
+
+    public void getCharacter() {
     }
 
     public void moveAliens(){
