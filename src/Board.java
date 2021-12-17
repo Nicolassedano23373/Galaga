@@ -1,3 +1,5 @@
+
+
 import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
@@ -15,6 +17,7 @@ import java.awt.image.*;
 import java.io.*;
 
 public class Board  extends JPanel implements Runnable, MouseListener {
+    public static int direction;
     boolean ingame = true;
     private Dimension d;
     int BOARD_WIDTH = 500;
@@ -223,11 +226,16 @@ public class Board  extends JPanel implements Runnable, MouseListener {
                         System.currentTimeMillis()));
             }catch (InterruptedException e) {
                 System.out.println(e);
+
+
+
+
             }//end catch
             }//end while loop
         }//end of run
 
     }//end of class
+
 
 
 
